@@ -1,9 +1,17 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import QuoteForm from "../components/quotes/QuoteForm";
 
 const NewQuotes = () => {
+  const history = useHistory();
+  const addingNeqQuote = (newData) => {
+    console.log(newData);
+
+    history.push("/quotes");
+  };
   return (
     <div>
-      <h1>New Quotes will be generated here</h1>
+      <QuoteForm onAddQuote={addingNeqQuote} />
     </div>
   );
 };
