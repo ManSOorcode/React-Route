@@ -9,7 +9,7 @@ const NewQuotes = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (status == "completed") {
+    if (status === "completed") {
       history.push("/quotes");
     }
   }, [status, history]);
@@ -18,7 +18,7 @@ const NewQuotes = () => {
   };
   return (
     <div>
-      <QuoteForm isLoading={status == "pending"} onAddQuote={addingNeqQuote} />
+      <QuoteForm isLoading={status === "pending"} onAddQuote={addingNeqQuote} />
     </div>
   );
 };

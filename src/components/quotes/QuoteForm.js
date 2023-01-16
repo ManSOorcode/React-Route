@@ -28,7 +28,7 @@ const QuoteForm = (props) => {
   const formIsFocusHandler = () => {
     setEnteringState(true);
 
-    console.log("hello", isEntering);
+    // console.log("hello", isEntering);
   };
 
   return (
