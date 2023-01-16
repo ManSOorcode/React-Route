@@ -70,7 +70,7 @@ const QuotesDetails = () => {
 
   // const quote = DUMMY_DATA.find((quote) => quote.id === params.quotesId);
 
-  if (!loadedQuote) {
+  if (!loadedQuote.text) {
     return <NotFoundPage />;
   }
   return (
