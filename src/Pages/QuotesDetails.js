@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Route,
   useParams,
@@ -11,11 +11,39 @@ import Comments from "../components/comments/Comments";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import NotFoundPage from "./NotFoundPage";
 
+import useHttp from "../hooks/use-http";
+import { getSingleQuote } from "../lib/api";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+
 const QuotesDetails = () => {
   const params = useParams();
   const match = useRouteMatch();
   const location = useLocation();
 
+  const { quotesId } = params;
+
+  const {
+    sendRequest,
+    status,
+    data: loadedQuote,
+    error,
+  } = useHttp(getSingleQuote, true);
+
+  useEffect(() => {
+    sendRequest(quotesId);
+  }, [sendRequest, quotesId]);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="centered">{error}</p>;
+  }
   console.log(
     match
   ); /*{path: '/quotes/:quotesId', url: '/quotes/d1', isExact: false, params: {…}}
@@ -34,19 +62,23 @@ const QuotesDetails = () => {
   state: undefined
   */
 
-  const DUMMY_DATA = [
-    { id: "d1", author: "Mansoor", text: "Learning react is good" },
-    { id: "d2", author: "Osama", text: "Learning react is great" },
-  ];
+  //previous way
+  // const DUMMY_DATA = [
+  //   { id: "d1", author: "Mansoor", text: "Learning react is good" },
+  //   { id: "d2", author: "Osama", text: "Learning react is great" },
+  // ];
 
-  const quote = DUMMY_DATA.find((quote) => quote.id === params.quotesId);
+  // const quote = DUMMY_DATA.find((quote) => quote.id === params.quotesId);
 
-  if (!quote) {
+  if (!loadedQuote) {
     return <NotFoundPage />;
   }
   return (
     <div>
-      <HighlightedQuote author={quote.author} text={quote.text} />
+      {/* <HighlightedQuote author={quote.author} text={quote.text} />
+       */}
+      <HighlightedQuote author={loadedQuote.author} text={loadedQuote.text} />
+
       <Route path={"/quotes/:quotesId"} exact>
         <div className="centered">
           <Link className="btn--flat" to={`${match.url}/comments`}>
