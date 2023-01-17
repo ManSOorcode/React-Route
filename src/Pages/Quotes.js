@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
 import QuoteList from "../components/quotes/QuoteList";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
@@ -12,6 +13,9 @@ const Quotes = (props) => {
     data: loadedQuote,
     error,
   } = useHttp(getAllQuotes, true);
+
+  // const param = useParams();
+  // console.log(param.quotesId);
 
   useEffect(() => {
     sendRequest();
