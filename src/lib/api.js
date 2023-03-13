@@ -1,4 +1,5 @@
 const FIREBASE_DOMAIN =
+  /* API LINK */
   "https://mansoor-quote-http-default-rtdb.firebaseio.com/";
 
 export async function getAllQuotes() {
