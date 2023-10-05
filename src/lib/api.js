@@ -1,6 +1,7 @@
 const FIREBASE_DOMAIN =
   /* API LINK */
-  "https://mansoor-quote-http-default-rtdb.firebaseio.com/";
+
+  "https://quotes-new-fe675-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
 export async function getAllQuotes() {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
